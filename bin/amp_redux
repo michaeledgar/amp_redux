@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require 'amp_redux'
+Amp::Dispatcher.new(ARGV).run!
