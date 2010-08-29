@@ -5,6 +5,10 @@
 *.tmproj
 tmtags
 
+## HG
+.hg/*
+.hgignore
+
 ## EMACS
 *~
 \#*
