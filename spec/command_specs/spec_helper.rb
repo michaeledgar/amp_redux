@@ -12,14 +12,12 @@
 #                                                                #
 ##################################################################
 
-require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
+require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-describe Amp do
-  it "has a version" do
-    Amp::VERSION.should_not be_nil
-  end
-  
-  it "has a version title" do
-    Amp::VERSION_TITLE.should_not be_nil
-  end
+def swizzling_argv(argv)
+  old_argv = ARGV.dup
+  ARGV.replace(argv)
+  yield
+ensure
+  ARGV.replace(old_argv)
 end

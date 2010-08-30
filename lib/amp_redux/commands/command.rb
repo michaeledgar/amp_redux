@@ -12,14 +12,15 @@
 #                                                                #
 ##################################################################
 
-require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
-
-describe Amp do
-  it "has a version" do
-    Amp::VERSION.should_not be_nil
-  end
-  
-  it "has a version title" do
-    Amp::VERSION_TITLE.should_not be_nil
+module Amp
+  module Command
+    # Creates a new command class and sets its name appropriately.
+    def self.create(name)
+      name[0,1] = name[0,1].upcase
+      new_class = Class.new(Base)
+      yield new_class
+      self.const_set(name.to_s, new_class)
+      new_class
+    end
   end
 end

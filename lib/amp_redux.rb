@@ -3,6 +3,9 @@ module Amp
   VERSION_TITLE = "Koyaanisqatsi"
   
   $LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__)))
+  module Command
+    autoload :Base, "amp_redux/commands/base.rb"
+  end
   
   module Dispatch
     autoload :Runner, "amp_redux/dispatch/runner.rb"

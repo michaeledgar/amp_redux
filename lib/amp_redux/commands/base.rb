@@ -12,14 +12,37 @@
 #                                                                #
 ##################################################################
 
-require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
-
-describe Amp do
-  it "has a version" do
-    Amp::VERSION.should_not be_nil
-  end
-  
-  it "has a version title" do
-    Amp::VERSION_TITLE.should_not be_nil
+module Amp
+  module Command
+    # The base class frmo which all comamnds inherit.
+    class Base
+      def self.on_run(&block)
+        @on_run = block if block_given?
+        @on_run
+      end
+      
+      def self.options
+        @options ||= []
+      end
+      
+      def self.opt(*args)
+        self.options << args
+      end
+      
+      # Runs the command with the provided options and arguments.
+      def run(options, arguments)
+        self.class.on_run.call(options, arguments)
+      end
+      
+      # Collects the options specific to this command and returns them.
+      def collect_options
+        base_options = self.class.options
+        Trollop::options do
+          base_options.each do |option|
+            opt *option
+          end
+        end
+      end
+    end
   end
 end

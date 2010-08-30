@@ -13,13 +13,31 @@
 ##################################################################
 
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
+require 'amp_redux/commands/command'
 
-describe Amp do
-  it "has a version" do
-    Amp::VERSION.should_not be_nil
+counter = 0
+
+describe Amp::Dispatch::Runner do
+  define_method :next_name do
+    counter += 1
+    "TempClass#{counter}"
   end
-  
-  it "has a version title" do
-    Amp::VERSION_TITLE.should_not be_nil
+
+  context 'when created with a specific name' do
+    before do
+      @name = next_name
+      @class = Amp::Command.create(@name) do |c|
+        c.opt :verbose, "Verbose output", :type => :boolean
+      end
+    end
+    
+    it 'creates the named class as a submodule of Amp::Command' do
+      Amp::Command.const_get(@name).should == @class
+    end
+    
+    it 'uppercases the first letter of the name' do
+      klass = Amp::Command.create('search0') {|c| }
+      Amp::Command.const_get('Search0').should == klass
+    end
   end
 end

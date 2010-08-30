@@ -14,6 +14,9 @@
 
 module Amp
   module Dispatch
+    
+    # This class runs Amp as a binary. Create a new instance with the arguments
+    # to use, and call run! to run Amp.
     class Runner
       def initialize(args)
         @args = args

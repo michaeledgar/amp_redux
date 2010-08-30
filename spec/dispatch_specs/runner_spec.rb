@@ -16,7 +16,7 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe Amp::Dispatch::Runner do
   before do
-    @runner = Amp::Dispatch::Runner.new(["hi", "there", "--how", "are", "you?"])
+    @runner = Amp::Dispatch::Runner.new(["--version"])
   end
 
   describe "#with_argv" do
@@ -26,6 +26,12 @@ describe Amp::Dispatch::Runner do
         ARGV.should == ["hi", "there"]
       end
       ARGV.should == current
+    end
+  end
+
+  describe "#run!" do
+    it "parses arguments" do
+      proc { @runner.run! }.should raise_error(SystemExit)
     end
   end
   
