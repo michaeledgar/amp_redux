@@ -13,5 +13,5 @@
 #                                                                #
 ##################################################################
 
-require 'amp_redux'
-Amp::Dispatcher.new(ARGV).run!
+require 'lib/amp_redux'
+Amp::Dispatch::Runner.new(ARGV).run!

@@ -13,8 +13,9 @@
 ##################################################################
 
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
+require 'amp_redux/dispatch/commands/base'
 
-describe Amp::Dispatch::Runner do
+describe Amp::Command::Base do
   before do
     @klass = Class.new(Amp::Command::Base)
   end

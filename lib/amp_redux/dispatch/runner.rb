@@ -11,6 +11,7 @@
 #  © Michael J. Edgar and Ari Brown, 2009-2010                   #
 #                                                                #
 ##################################################################
+require 'amp_redux/dispatch/commands/command'
 
 module Amp
   module Dispatch
@@ -25,9 +26,26 @@ module Amp
       def run!
         with_argv @args do
           global_opts = collect_options!
+          
+          command_class = Amp::Command.for_name(ARGV.join(' '))
+          command = command_class.new
+          trim_argv_for_command(command_class)
+          opts = global_opts.merge command.collect_options
+          command.run(opts, ARGV)
         end
       end
-    
+      
+      def trim_argv_for_command(command)
+        path_parts = command.name.gsub(/Amp::Command::/, '').gsub(/::/, ' ').split
+        path_parts.each do |part|
+          next_part = ARGV.shift
+          if next_part.downcase != part.downcase
+            raise ArgumentError.new(
+                "Failed to parse command line option for: #{command}")
+          end
+        end
+      end
+      
       def collect_options!
         Trollop::options do
           banner "Amp - some more crystal, sir?"

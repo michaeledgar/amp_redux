@@ -543,14 +543,6 @@ private
         params = collect_argument_parameters(args, i + 1)
         unless params.empty?
           num_params_taken = yield args[i], params
-          unless num_params_taken
-            if @stop_on_unknown
-              remains += args[i + 1 .. -1]
-              return remains
-            else
-              remains += params
-            end
-          end
           i += 1 + num_params_taken
         else # long argument no parameter
           yield args[i], nil
@@ -563,14 +555,6 @@ private
             params = collect_argument_parameters(args, i + 1)
             unless params.empty?
               num_params_taken = yield "-#{a}", params
-              unless num_params_taken
-                if @stop_on_unknown
-                  remains += args[i + 1 .. -1]
-                  return remains
-                else
-                  remains += params
-                end
-              end
               i += 1 + num_params_taken
             else # argument no parameter
               yield "-#{a}", nil

@@ -14,6 +14,20 @@
 
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
+def run_command(command, opts={}, args=[])
+  swizzling_stdout do
+    Amp::Command.for_name(command).new.run(opts, args)
+  end
+end
+
+
+def next_name
+  # Shared by all subclasses.
+  @@__next_name_counter ||= 0
+  @@__next_name_counter += 1
+  "TempClass#{@@__next_name_counter}"
+end
+
 def swizzling_argv(argv)
   old_argv = ARGV.dup
   ARGV.replace(argv)
