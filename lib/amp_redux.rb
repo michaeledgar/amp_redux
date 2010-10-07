@@ -14,6 +14,7 @@ module Amp
     autoload :Base,     'amp_redux/plugins/base.rb'
     autoload :Registry, 'amp_redux/plugins/registry.rb'
   end
+  autoload :ModuleExtensions, 'amp_redux/support/module_extensions.rb'
 end
 
 autoload :Trollop, 'amp_redux/third_party/trollop.rb'

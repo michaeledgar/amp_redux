@@ -18,20 +18,29 @@ module Amp
     # The base class frmo which all comamnds inherit.
     class Base
       include Validations
-      
+
       class << self
         attr_accessor :name, :options, :desc
       end
-      # Tracks which commands are created for dynamic lookups
-      def self.inherited(klass)
-        all_commands << klass
-      end
-      
-      # Returns all known commands
+
+      # This tracks all subclasses (and subclasses of subclasses, etc). Plus, this
+      # method is inherited, so Wool::Plugins::Git.all_subclasses will have all
+      # subclasses of Wool::Plugins::Git!
       def self.all_commands
-        @all_subclasses ||= []
+        @all_commands ||= [self]
       end
-      
+
+      # When a Plugin subclass is subclassed, store the subclass and inform the
+      # next superclass up the inheritance hierarchy.
+      def self.inherited(klass)
+        self.all_commands << klass
+        next_klass = self.superclass
+        while next_klass != Amp::Command::Base.superclass
+          next_klass.send(:inherited, klass)
+          next_klass = next_klass.superclass
+        end
+      end
+
       # Specifies the block to run, or returns the block.
       def self.on_run(&block)
         @on_run = block if block_given?

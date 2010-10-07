@@ -17,6 +17,8 @@ $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 require 'amp_redux'
 require 'spec'
 
+include Amp
+
 Spec::Runner.configure do |config|
 end
 

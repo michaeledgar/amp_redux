@@ -16,19 +16,21 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe Amp::Plugins::Base do
   it 'yields itself for easy configuration' do
-    new_plugin = Amp::Plugins::Base.new('silly') do |plugin|
+    new_plugin = Amp::Plugins::Base.create('silly') do |plugin|
       plugin.author = 'Michael Edgar'
     end
     new_plugin.author.should == 'Michael Edgar'
   end
   
   it 'mentions its author when inspected' do
-    plugin = Amp::Plugins::Base.new('silly', nil, 'adgar@carboni.ca')
-    plugin.inspect.should include('adgar@carboni.ca')
+    plugin = Amp::Plugins::Base.create('silly') do |plugin|
+      plugin.author = 'adgar@carboni.ca'
+    end
+    plugin.new.inspect.should include('adgar@carboni.ca')
   end
   
   it 'infers its own module name' do
-    plugin = Amp::Plugins::Base.new('silly', nil, 'adgar@carboni.ca')
-    plugin.module.should == 'Silly'
+    plugin = Amp::Plugins::Base.create('silly')
+    plugin.new.module.should == 'Amp::Plugins::Silly'
   end
 end

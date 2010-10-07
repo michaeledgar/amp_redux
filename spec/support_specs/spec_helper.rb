@@ -12,23 +12,4 @@
 #                                                                #
 ##################################################################
 
-module Amp
-  module Plugins
-    module Registry
-      class << self
-        attr_reader :all_plugins, :all_plugins_map
-      end
-      
-      def self.register_plugin(plugin)
-        @all_plugins << plugin
-        @all_plugins_map[plugin.name] = plugin
-      end
-      
-      def self.init_registry
-        @all_plugins = []
-        @all_plugins_map = {}
-      end
-      init_registry
-    end
-  end
-end
+require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
