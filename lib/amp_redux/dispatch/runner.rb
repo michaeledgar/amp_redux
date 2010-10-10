@@ -17,13 +17,13 @@ module Amp
   module Dispatch
     
     # This class runs Amp as a binary. Create a new instance with the arguments
-    # to use, and call run! to run Amp.
+    # to use, and call call! to run Amp.
     class Runner
       def initialize(args)
         @args = args
       end
     
-      def run!
+      def call!
         with_argv @args do
           global_opts = collect_options!
           
@@ -31,7 +31,7 @@ module Amp
           command = command_class.new
           trim_argv_for_command(command_class)
           opts = global_opts.merge command.collect_options
-          command.run(opts, ARGV)
+          command.call(opts, ARGV)
         end
       end
       

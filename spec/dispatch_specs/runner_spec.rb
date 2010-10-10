@@ -29,9 +29,9 @@ describe Amp::Dispatch::Runner do
     end
   end
 
-  describe '#run!' do
+  describe '#call!' do
     it 'parses arguments' do
-      proc { @runner.run! }.should raise_error(SystemExit)
+      proc { @runner.call! }.should raise_error(SystemExit)
     end
     
     it 'runs the matching command' do
@@ -43,11 +43,11 @@ describe Amp::Dispatch::Runner do
       mock_command_class.should_receive(:name).and_return('Amp::Command::Tester')
       mock_command_class.should_receive(:new).and_return(mock_command)
       mock_command.should_receive(:collect_options).and_return({:verbose => true})
-      mock_command.should_receive(:run).with(
+      mock_command.should_receive(:call).with(
           {:verbose => true, :help => false, :version => false}, ['--verbose'])
       
       runner = Amp::Dispatch::Runner.new(['tester', '--verbose'])
-      runner.run!
+      runner.call!
     end
   end
   

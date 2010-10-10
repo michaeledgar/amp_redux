@@ -42,9 +42,9 @@ module Amp
       end
 
       # Specifies the block to run, or returns the block.
-      def self.on_run(&block)
-        @on_run = block if block_given?
-        @on_run
+      def self.on_call(&block)
+        @on_call = block if block_given?
+        @on_call
       end
       
       def self.desc(*args)
@@ -61,8 +61,8 @@ module Amp
       end
       
       # Runs the command with the provided options and arguments.
-      def run(options, arguments)
-        self.class.on_run.call(options, arguments)
+      def call(options, arguments)
+        self.class.on_call.call(options, arguments)
       end
       
       # Collects the options specific to this command and returns them.
