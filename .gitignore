@@ -16,6 +16,7 @@ tmtags
 
 ## VIM
 *.swp
+.vimrc
 
 ## PROJECT::GENERAL
 coverage
