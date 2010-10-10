@@ -26,3 +26,4 @@ pkg
 doc/*
 .yardoc
 tmp/*
+.rvmrc
