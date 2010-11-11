@@ -10,6 +10,10 @@ begin
     gem.email = 'michael.j.edgar@dartmouth.edu'
     gem.homepage = 'http://github.com/michaeledgar/amp_redux'
     gem.authors = ['Michael Edgar']
+    gem.add_dependency 'amp-front', '>= 0.1.0'
+    gem.add_dependency 'amp-core', '>= 0.1.0'
+    gem.add_dependency 'amp-git', '>= 0.1.0'
+    gem.add_dependency 'amp-hg', '>= 0.1.0'
     gem.add_development_dependency 'rspec', '>= 1.2.9'
     gem.add_development_dependency 'yard', '>= 0'
     gem.add_development_dependency 'cucumber', '>= 0'
