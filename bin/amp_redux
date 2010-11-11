@@ -13,5 +13,10 @@
 #                                                                #
 ##################################################################
 
-require 'lib/amp_redux'
+# We require rubygems for now. I know, I know, "dont require rubygems".
+# But right now the plugin architecture means Rubygems are necessary.
+require 'rubygems'
+require 'amp-front'
+require 'amp-core'
+
 Amp::Dispatch::Runner.new(ARGV).run!

@@ -4,20 +4,21 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "amp_redux"
+    gem.name = 'amp_redux'
     gem.summary = %Q{A meta-VCS in Ruby, harnessing Ruby's strengths.}
-    gem.description = %Q{TODO: longer description of your gem}
-    gem.email = "michael.j.edgar@dartmouth.edu"
-    gem.homepage = "http://github.com/michaeledgar/amp_redux"
-    gem.authors = ["Michael Edgar"]
-    gem.add_development_dependency "rspec", ">= 1.2.9"
-    gem.add_development_dependency "yard", ">= 0"
-    gem.add_development_dependency "cucumber", ">= 0"
+    gem.description = %Q{This package is a small wrapper around several core amp plugins.}
+    gem.email = 'michael.j.edgar@dartmouth.edu'
+    gem.homepage = 'http://github.com/michaeledgar/amp_redux'
+    gem.authors = ['Michael Edgar']
+    gem.add_development_dependency 'rspec', '>= 1.2.9'
+    gem.add_development_dependency 'yard', '>= 0'
+    gem.add_development_dependency 'cucumber', '>= 0'
+    gem.add_development_dependency 'metric_fu', '>= 0'
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
-  puts "Jeweler (or a dependency) not available. Install it with: gem install jeweler"
+  puts 'Jeweler (or a dependency) not available. Install it with: gem install jeweler'
 end
 
 require 'metric_fu'
